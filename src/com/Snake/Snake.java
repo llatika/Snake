@@ -1,18 +1,36 @@
 package com.Snake;
 
 public class Snake {
-    BoardSupervisor boardSupervisor = new BoardSupervisor();
-    BoardDrawer boardDrawer = new BoardDrawer();
-    UserInput userInput = new UserInput();
-    Timer timer = new Timer();
 
-    public void run() {
-        while (true) {
+    private int xPosition = 0, yPosition = 0;
 
-            boardDrawer.draw(boardSupervisor.move());
-            userInput.getInput();
-            timer.sleep(1000);
+    public Board move(Board board, Keys key) {
+        switch (key) {
+            case RIGHT -> {
+                board.set(xPosition, yPosition, new Cell(CellType.EMPTY));
+                yPosition++;
+                board.set(xPosition, yPosition, new Cell(CellType.POINT));
+            }
+            case LEFT -> {
+                board.set(xPosition, yPosition, new Cell(CellType.EMPTY));
+                yPosition--;
+                board.set(xPosition, yPosition, new Cell(CellType.POINT));
+
+            }
+            case DOWN -> {
+                board.set(xPosition, yPosition, new Cell(CellType.EMPTY));
+                xPosition++;
+                board.set(xPosition, yPosition, new Cell(CellType.POINT));
+            }
+            case UP -> {
+                board.set(xPosition, yPosition, new Cell(CellType.EMPTY));
+                xPosition--;
+                board.set(xPosition, yPosition, new Cell(CellType.POINT));
+            }
+            default -> {
+                board.set(xPosition, yPosition, new Cell(CellType.POINT));
+            }
         }
+        return board;
     }
-
 }

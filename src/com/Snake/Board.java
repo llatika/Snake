@@ -1,10 +1,8 @@
 package com.Snake;
 
-import java.awt.*;
-
 public class Board {
 
-    private Cell[][] boardTable;
+    private final Cell[][] boardTable;
 
     public Board(int width, int height) {
         boardTable = new Cell[width][height];
@@ -14,10 +12,6 @@ public class Board {
                 boardTable[i][j] = new Cell(CellType.EMPTY);
             }
         }
-
-     /*   boardTable[boardTable.length/2-1][0]= new Cell(CellType.POINT);
-        boardTable[boardTable.length/2-1][1] = new Cell(CellType.POINT);*/
-        boardTable[boardTable.length/2-1][2] = new Cell(CellType.POINT);
     }
 
     public void set(int x, int y, Cell cell) {

@@ -1,10 +1,9 @@
 package com.Snake;
 
-import java.util.Arrays;
-
 public class BoardDrawer {
 
     public void draw(Board board) {
+        clearScreen();
         for (int i = 0; i < board.getLengthColumn(); i++) {
             System.out.println();
             for (int j = 0; j < board.getLengthRows(); j++) {
@@ -13,11 +12,17 @@ public class BoardDrawer {
         }
     }
 
-    private void drawCell(Cell cell){
-        if(cell.getCellType() == CellType.EMPTY)
-        {
-            System.out.print("*");
+    public void clearScreen() {
+        for (int i = 0; i < 10; i++) {
+            System.out.println();
         }
-        else System.out.print("O");
     }
+
+
+    private void drawCell(Cell cell) {
+        if (cell.getCellType() == CellType.EMPTY) {
+            System.out.print("*");
+        } else System.out.print("O");
+    }
+
 }
