@@ -8,7 +8,11 @@ public class SnakeEngine {
 
     public void run() {
 
+        boardDrawer.draw(boardSupervisor.board);
         while (true) {
+            System.out.println();
+            System.out.println();
+            System.out.print(">>> ");
             Keys userKey = userInput.getInput();
             Board boardObject = boardSupervisor.move(userKey);
             boardDrawer.draw(boardObject);

@@ -1,7 +1,7 @@
 package com.Snake;
 import java.util.Scanner;
 
-public class UserInput implements KeyTest {
+public class UserInput{
 
     public Keys getInput() {
         Scanner scanner = new Scanner(System.in);

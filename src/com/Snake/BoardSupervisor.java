@@ -6,7 +6,8 @@ public class BoardSupervisor {
     Snake snake = new Snake();
 
     public BoardSupervisor() {
-        board = new Board(5, 6);
+        board = new Board(10, 30);
+        board.set(0,0,new Cell(CellType.POINT));
     }
 
     public Board move(Keys key) {
