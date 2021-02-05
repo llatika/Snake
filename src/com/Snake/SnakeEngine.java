@@ -14,7 +14,7 @@ public class SnakeEngine {
             System.out.println();
             System.out.print(">>> ");
             Keys userKey = userInput.getInput();
-            Board boardObject = boardSupervisor.move(userKey);
+            Board boardObject = boardSupervisor.move(userKey,boardSupervisor.coordinatesArray);
             boardDrawer.draw(boardObject);
             //timer.sleep(1000);
         }
