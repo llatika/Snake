@@ -29,4 +29,5 @@ public class Board {
     public int getLengthRows() {
         return boardTable[0].length;
     }
+
 }

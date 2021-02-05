@@ -14,9 +14,23 @@ public class SnakeEngine {
             System.out.println();
             System.out.print(">>> ");
             Keys userKey = userInput.getInput();
-            Board boardObject = boardSupervisor.move(userKey,boardSupervisor.coordinatesArray);
+            Board boardObject = null;
+
+            try {
+                boardObject = boardSupervisor.move(userKey, boardSupervisor.coordinatesArray);
+            } catch (SnakeOutOfIndexCustomException e) {
+                gameOver();
+                break;
+            }
+
             boardDrawer.draw(boardObject);
             //timer.sleep(1000);
         }
+    }
+
+    public void gameOver() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+        System.out.println("Game over!");
     }
 }

@@ -23,7 +23,7 @@ public class BoardSupervisor {
         }
     }
 
-    public Board move(Keys key, List<Coordinates> list) {
+    public Board move(Keys key, List<Coordinates> list) throws SnakeOutOfIndexCustomException {
         return snake.move(board, key, list);
     }
 }
