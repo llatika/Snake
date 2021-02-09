@@ -4,87 +4,111 @@ import java.util.List;
 
 public class Snake {
 
-    private int xPosition, yPosition;
     private boolean busyUp, busyDown, busyRight, busyLeft = true;
 
-    public Board move(Board board, Keys key, List<Coordinates> list) throws SnakeOutOfIndexCustomException {
+    public Board move(Board board, Keys key, List<Coordinates> list, Star star) throws SnakeOutOfIndexCustomException {
 
-        xPosition = list.get(0).getX();
-        yPosition = list.get(0).getY();
+        int xPosition = list.get(0).getX();
+        int yPosition = list.get(0).getY();
+        int a = star.getStarX();
+        int b=star.getStarY();
         switch (key) {
 
             case RIGHT -> {
                 if (!busyRight) {
-                    board.set(list.get(list.size() - 1).getX(), list.get(list.size() - 1).getY(), new Cell(CellType.EMPTY));
-                    list.remove(list.size() - 1);
-                    if (!isXNewCoordinate(board, ++yPosition))
-                        throw new SnakeOutOfIndexCustomException();
 
-                    board.set(xPosition, yPosition, new Cell(CellType.POINT));
-                    list.add(0, new Coordinates(list.get(0).getX(), list.get(0).getY() + 1));
-                    busyLeft = true;
-                    busyUp = false;
-                    busyDown = false;
-                    busyRight = false;
+                    if (yPosition == star.getStarY() && xPosition+1 == star.getStarX()) {
+                        board.set(yPosition, ++xPosition, new Cell(CellType.POINT));
+                        list.add(0, new Coordinates(list.get(0).getY(), list.get(0).getX() + 1));
+                    } else if (!isXNewCoordinate(board, xPosition+1)) {
+                        throw new SnakeOutOfIndexCustomException();
+                    } else {
+                        board.set(list.get(list.size() - 1).getY(), list.get(list.size() - 1).getX(), new Cell(CellType.EMPTY));
+                        list.remove(list.size() - 1);
+                        board.set(yPosition, ++xPosition, new Cell(CellType.POINT));
+                        list.add(0, new Coordinates(list.get(0).getY(), list.get(0).getX() + 1));
+                        busyLeft = true;
+                        busyUp = false;
+                        busyDown = false;
+                        busyRight = false;
+                    }
                 }
             }
             case LEFT -> {
                 if (!busyLeft) {
-                    board.set(list.get(list.size() - 1).getX(), list.get(list.size() - 1).getY(), new Cell(CellType.EMPTY));
-                    list.remove(list.size() - 1);
-                    if (!isXNewCoordinate(board, --yPosition))
+                    if (yPosition == star.getStarY() && xPosition-1 == star.getStarX()) {
+                        board.set(yPosition, --xPosition, new Cell(CellType.POINT));
+                        list.add(0, new Coordinates(list.get(0).getY(), list.get(0).getX() - 1));
+
+                    } else if (!isXNewCoordinate(board, xPosition-1)) {
                         throw new SnakeOutOfIndexCustomException();
-                    board.set(xPosition, yPosition, new Cell(CellType.POINT));
-                    list.add(0, new Coordinates(list.get(0).getX(), list.get(0).getY() - 1));
-                    busyRight = true;
-                    busyDown = false;
-                    busyUp = false;
-                    busyLeft = false;
+                    } else {
+                        board.set(list.get(list.size() - 1).getY(), list.get(list.size() - 1).getX(), new Cell(CellType.EMPTY));
+                        list.remove(list.size() - 1);
+                        board.set(yPosition, --xPosition, new Cell(CellType.POINT));
+                        list.add(0, new Coordinates(list.get(0).getY(), list.get(0).getX() - 1));
+                        busyRight = true;
+                        busyDown = false;
+                        busyUp = false;
+                        busyLeft = false;
+                    }
                 }
 
             }
             case DOWN -> {
                 if (!busyDown) {
-                    board.set(list.get(list.size() - 1).getX(), list.get(list.size() - 1).getY(), new Cell(CellType.EMPTY));
-                    list.remove(list.size() - 1);
-                    if (!isYNewCoordinate(board, ++xPosition))
+                    if (yPosition+1 == star.getStarY() && xPosition == star.getStarX()) {
+                        board.set(++yPosition, xPosition, new Cell(CellType.POINT));
+                        list.add(0, new Coordinates(list.get(0).getY() + 1, list.get(0).getX()));
+
+                    } else if (!isYNewCoordinate(board, yPosition+1)) {
                         throw new SnakeOutOfIndexCustomException();
-                    board.set(xPosition, yPosition, new Cell(CellType.POINT));
-                    list.add(0, new Coordinates(list.get(0).getX() + 1, list.get(0).getY()));
-                    busyUp = true;
-                    busyLeft = false;
-                    busyRight = false;
-                    busyDown = false;
+                    } else {
+                        board.set(list.get(list.size() - 1).getY(), list.get(list.size() - 1).getX(), new Cell(CellType.EMPTY));
+                        list.remove(list.size() - 1);
+                        board.set(++yPosition, xPosition, new Cell(CellType.POINT));
+                        list.add(0, new Coordinates(list.get(0).getY() + 1, list.get(0).getX()));
+                        busyUp = true;
+                        busyLeft = false;
+                        busyRight = false;
+                        busyDown = false;
+                    }
                 }
             }
             case UP -> {
                 if (!busyUp) {
-                    board.set(list.get(list.size() - 1).getX(), list.get(list.size() - 1).getY(), new Cell(CellType.EMPTY));
-                    list.remove(list.size() - 1);
-                    if (!isXNewCoordinate(board, --xPosition))
+                    if (yPosition-1 == star.getStarY() && xPosition == star.getStarX()) {
+                        board.set(--yPosition, xPosition, new Cell(CellType.POINT));
+                        list.add(0, new Coordinates(list.get(0).getY() - 1, list.get(0).getX()));
+
+                    } else if (!isYNewCoordinate(board, yPosition-1)) {
                         throw new SnakeOutOfIndexCustomException();
-                    board.set(xPosition, yPosition, new Cell(CellType.POINT));
-                    list.add(0, new Coordinates(list.get(0).getX() - 1, list.get(0).getY()));
-                    busyDown = true;
-                    busyRight = false;
-                    busyLeft = false;
-                    busyUp = false;
+                    } else {
+                        board.set(list.get(list.size() - 1).getY(), list.get(list.size() - 1).getX(), new Cell(CellType.EMPTY));
+                        list.remove(list.size() - 1);
+                        board.set(--yPosition, xPosition, new Cell(CellType.POINT));
+                        list.add(0, new Coordinates(list.get(0).getY() - 1, list.get(0).getX()));
+                        busyDown = true;
+                        busyRight = false;
+                        busyLeft = false;
+                        busyUp = false;
+                    }
                 }
             }
             default -> {
-                board.set(xPosition, yPosition, new Cell(CellType.POINT));
+                board.set(yPosition, xPosition, new Cell(CellType.POINT));
             }
         }
         return board;
     }
 
     public boolean isYNewCoordinate(Board board, int param) {
-        if (param<0 || param>= board.getLengthRows()) return false;
+        if (param < 0 || param >= board.getLengthColumn()) return false;
         else return true;
     }
 
     public boolean isXNewCoordinate(Board board, int param) {
-        if (param<0 || param>= board.getLengthColumn()) return false;
+        if (param < 0 || param >= board.getLengthColumn()) return false;
         else return true;
     }
 }

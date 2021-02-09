@@ -13,13 +13,4 @@ public class Cell {
         return cellType;
     }
 
-   // @Override
-   /* public String toString()
-    {
-
-
-   //     if()
-
-    }*/
-
 }

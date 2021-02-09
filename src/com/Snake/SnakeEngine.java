@@ -17,7 +17,7 @@ public class SnakeEngine {
             Board boardObject = null;
 
             try {
-                boardObject = boardSupervisor.move(userKey, boardSupervisor.coordinatesArray);
+                boardObject = boardSupervisor.move(userKey, boardSupervisor.coordinatesArray, boardSupervisor.star);
             } catch (SnakeOutOfIndexCustomException e) {
                 gameOver();
                 break;

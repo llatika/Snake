@@ -4,8 +4,8 @@ public class Board {
 
     private final Cell[][] boardTable;
 
-    public Board(int width, int height) {
-        boardTable = new Cell[width][height];
+    public Board(int height, int width) {
+        boardTable = new Cell[height][width];
 
         for (int i = 0; i < boardTable.length; i++) {
             for (int j = 0; j < boardTable[0].length; j++) {
@@ -14,20 +14,20 @@ public class Board {
         }
     }
 
-    public void set(int x, int y, Cell cell) {
-        boardTable[x][y] = cell;
+    public void set(int y, int x, Cell cell) {
+        boardTable[y][x] = cell;
     }
 
-    public Cell get(int width, int height) {
-        return boardTable[width][height];
+    public Cell get(int y, int x ) {
+        return boardTable[y][x];
     }
 
     public int getLengthColumn() {
-        return boardTable.length;
+        return boardTable[0].length;
     }
 
     public int getLengthRows() {
-        return boardTable[0].length;
+        return boardTable.length;
     }
 
 }

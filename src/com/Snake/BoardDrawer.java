@@ -3,9 +3,9 @@ package com.Snake;
 public class BoardDrawer {
 
     public void draw(Board board) {
-        for (int i = 0; i < board.getLengthColumn(); i++) {
+        for (int i = 0; i < board.getLengthRows(); i++) {
             System.out.println();
-            for (int j = 0; j < board.getLengthRows(); j++) {
+            for (int j = 0; j < board.getLengthColumn(); j++) {
                 drawCell(board.get(i, j));
             }
         }
@@ -18,8 +18,10 @@ public class BoardDrawer {
     }
 
     private void drawCell(Cell cell) {
-        if (cell.getCellType() == CellType.EMPTY) {
-            System.out.print("*");
-        } else System.out.print("O");
+        switch (cell.getCellType()) {
+            case EMPTY -> System.out.print("*");
+            case POINT -> System.out.print("0");
+            case STAR -> System.out.print("%");
+        }
     }
 }
