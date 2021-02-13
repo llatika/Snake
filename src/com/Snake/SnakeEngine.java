@@ -17,14 +17,14 @@ public class SnakeEngine {
             Board boardObject = null;
 
             try {
-                boardObject = boardSupervisor.move(userKey, boardSupervisor.coordinatesArray, boardSupervisor.star);
+                boardObject = boardSupervisor.move(userKey, boardSupervisor.coordinatesArray);
             } catch (SnakeOutOfIndexCustomException e) {
                 gameOver();
                 break;
             }
 
             boardDrawer.draw(boardObject);
-            //timer.sleep(1000);
+            timer.sleep(500);
         }
     }
 
